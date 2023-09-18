@@ -1,0 +1,24 @@
+main {
+  width: 100%;
+  height: 100vh;
+}
+
+#conjunto {
+  display: flex;
+}
+
+button {
+  width: 13vw;
+  height: 20vh;
+}
+
+
+.backs {
+  width: 100%; 
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+#papel-img { background-image: url('./assets/papel.png'); }
+#pedra-img { background-image: url('./assets/pedra.png'); }
+#tesoura-img { background-image: url('./assets/tesoura.png'); }
