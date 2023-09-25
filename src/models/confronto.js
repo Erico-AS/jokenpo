@@ -23,9 +23,12 @@ export default function confronto(btn, setGanhador) {
 
     if(btn.id == moveBot.move) {
       setGanhador('Empate')
+      return 'empatou'
     } else if (btn.id == moveBot.ganha) {
       setGanhador('Você ganhou')
+      return 'ganhou'
     } else {
       setGanhador('Bot ganhou')
+      return 'perdeu'
     }
 }

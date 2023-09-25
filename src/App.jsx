@@ -1,27 +1,39 @@
 import './App.css'
 
 import confronto from './models/confronto'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 
 function App() {
   let [ganhador, setGanhador] = useState('')
+  let [ganhou, setGanhou] = useState(0)
+  let [empatou, setEmpatou] = useState(0)
+  let [perdeu, setPerdeu] = useState(0)
 
-  window.addEventListener('load', () =>{
-    let botoes = document.getElementsByClassName('botoes')
-    
-    for (let btn of botoes) {
-      console.log(btn)
-      btn.addEventListener('click', () => {
-        confronto(btn, setGanhador)
-      })
+  useEffect(() => {
+    const botoes = document.getElementsByClassName('botoes')
+
+    const handleClick = async (btn) => {
+      let resultado = await confronto(btn, setGanhador)
+      console.log(resultado)
+      if (resultado === 'ganhou') {
+        setGanhou(ganhou + 1)
+      } else if (resultado === 'empatou') {
+        setEmpatou(empatou + 1)
+      } else if (resultado === 'perdeu') {
+        setPerdeu(perdeu + 1)
+      }
     }
-  })
+
+    for (let btn of botoes) {
+      btn.addEventListener('click', () => handleClick(btn))
+    }
+  }, [ganhou, empatou, perdeu])
 
   return (
     <>
-      <h1>{ganhador}</h1>
       <main>
+        <h1>{ganhador}</h1>
         <div id="conjunto">
           <button id="papel" className="botoes">
             <div id="papel-img" className="backs"></div>
@@ -32,6 +44,12 @@ function App() {
           <button id="tesoura" className="botoes">
             <div id="tesoura-img" className="backs"></div>
           </button>
+        </div>
+
+        <div>
+          <p>Você ganhou {ganhou} vezes</p>
+          <p>Você perdeu {perdeu} vezes</p>
+          <p>Você empatou {empatou} vezes</p>
         </div>
       </main>
     </>
